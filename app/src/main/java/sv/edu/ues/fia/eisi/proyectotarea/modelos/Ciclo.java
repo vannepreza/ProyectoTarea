@@ -1,4 +1,4 @@
-package sv.edu.ues.fia.eisi.proyectotarea;
+package sv.edu.ues.fia.eisi.proyectotarea.modelos;
 
 public class Ciclo {
 
