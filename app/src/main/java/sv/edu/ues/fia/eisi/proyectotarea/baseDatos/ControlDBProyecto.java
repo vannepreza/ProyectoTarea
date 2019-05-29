@@ -1,4 +1,4 @@
-package sv.edu.ues.fia.eisi.proyectotarea;
+package sv.edu.ues.fia.eisi.proyectotarea.baseDatos;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,6 +6,10 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import sv.edu.ues.fia.eisi.proyectotarea.modelos.Actividad;
+import sv.edu.ues.fia.eisi.proyectotarea.modelos.Ciclo;
+import sv.edu.ues.fia.eisi.proyectotarea.modelos.HorarioNo;
 
 public class ControlDBProyecto {
     private static final String[]camposActividad = new String []

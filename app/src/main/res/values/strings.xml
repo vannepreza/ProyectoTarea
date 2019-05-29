@@ -10,43 +10,30 @@
     <string name="title_activity_tipo_amenu">TipoAMenuActivity</string>
 
     <!-- STRING DE LAS GESTIONES DE ACTIVIDAD -->
-    <string
-        name="title_activity_actividad_insertar">ActividadInsertarActivity</string>
-    <string
-        name="title_activity_actividad_eliminar">ActividadEliminarActivity</string>
-    <string
-        name="title_activity_actividad_actualizar">ActividadActualizarActivity</string>
-    <string
-        name="title_activity_actividad_consultar">ActividadConsultarActivity</string>
+    <string name="title_activity_actividad_insertar">ActividadInsertarActivity</string>
+    <string name="title_activity_actividad_eliminar">ActividadEliminarActivity</string>
+    <string name="title_activity_actividad_actualizar">ActividadActualizarActivity</string>
+    <string name="title_activity_actividad_consultar">ActividadConsultarActivity</string>
 
     <!-- STRING DE LAS GESTIONES DE CICLO -->
     <string name="title_activity_ciclo_insertar">CicloInsertarActivity</string>
     <string name="title_activity_ciclo_eliminar">CicloEliminarActivity</string>
-    <string
-        name="title_activity_ciclo_actualizar">CicloActualizarActivity</string>
+    <string name="title_activity_ciclo_actualizar">CicloActualizarActivity</string>
     <string name="title_activity_ciclo_consultar">CicloConsultarActivity</string>
 
     // STRING DE LAS GESTIONES DE HORARIO NO HÁBIL
 
-    <string
-        name="title_activity_horario_no_insertar">HorarioNoInsertarActivity</string>
-    <string
-        name="title_activity_horario_no_eliminar">HorarioNoEliminarActivity</string>
-    <string
-        name="title_activity_horario_no_actualizar">HorarioNoActualizarActivity</string>
-    <string
-        name="title_activity_horario_no_consultar">HorarioNoConsultarActivity</string>
+    <string name="title_activity_horario_no_insertar">HorarioNoInsertarActivity</string>
+    <string name="title_activity_horario_no_eliminar">HorarioNoEliminarActivity</string>
+    <string name="title_activity_horario_no_actualizar">HorarioNoActualizarActivity</string>
+    <string name="title_activity_horario_no_consultar">HorarioNoConsultarActivity</string>
 
     // STRING DE GESTIONES DE TIPO DE ACTIVIDAD
 
-    <string
-        name="title_activity_tipo_ainsertar">TipoAInsertarActivity</string>
-    <string
-        name="title_activity_tipo_aeliminar">TipoAEliminarActivity</string>
-    <string
-        name="title_activity_tipo_aactualizar">TipoAActualizarActivity</string>
-    <string
-        name="title_activity_tipo_aconsultar">TipoAConsultarActivity</string>
+    <string name="title_activity_tipo_ainsertar">TipoAInsertarActivity</string>
+    <string name="title_activity_tipo_aeliminar">TipoAEliminarActivity</string>
+    <string name="title_activity_tipo_aactualizar">TipoAActualizarActivity</string>
+    <string name="title_activity_tipo_aconsultar">TipoAConsultarActivity</string>
 
     <!-- String de las funciones para los menu -->
 

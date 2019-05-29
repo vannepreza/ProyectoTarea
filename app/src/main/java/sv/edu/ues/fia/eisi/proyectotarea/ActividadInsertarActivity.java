@@ -6,6 +6,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import sv.edu.ues.fia.eisi.proyectotarea.baseDatos.ControlDBProyecto;
+import sv.edu.ues.fia.eisi.proyectotarea.modelos.Actividad;
+
 public class ActividadInsertarActivity extends Activity {
     ControlDBProyecto helper;
     EditText editCiclo;

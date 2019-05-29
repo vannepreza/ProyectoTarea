@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import sv.edu.ues.fia.eisi.proyectotarea.baseDatos.ControlDBProyecto;
+
 public class MainActivity extends ListActivity {
     String[] menu={"Tabla Actividad","Tabla Ciclo","Tabla Horario No", "Tabla Tipo Actividad", "LLenar Base de Datos"};
             String[]
