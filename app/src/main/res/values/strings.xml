@@ -8,6 +8,7 @@
     <string name="title_activity_ciclo_menu">CicloMenuActivity</string>
     <string name="title_activity_horario_no_menu">HorarioNoMenuActivity</string>
     <string name="title_activity_tipo_amenu">TipoAMenuActivity</string>
+    <string name="title_activity_docente_menu">DocenteMenuActivity</string>
 
     <!-- STRING DE LAS GESTIONES DE ACTIVIDAD -->
     <string name="title_activity_actividad_insertar">ActividadInsertarActivity</string>
@@ -21,19 +22,26 @@
     <string name="title_activity_ciclo_actualizar">CicloActualizarActivity</string>
     <string name="title_activity_ciclo_consultar">CicloConsultarActivity</string>
 
-    // STRING DE LAS GESTIONES DE HORARIO NO HÁBIL
+    <!--STRING DE LAS GESTIONES DE HORARIO NO HÁBIL-->
 
     <string name="title_activity_horario_no_insertar">HorarioNoInsertarActivity</string>
     <string name="title_activity_horario_no_eliminar">HorarioNoEliminarActivity</string>
     <string name="title_activity_horario_no_actualizar">HorarioNoActualizarActivity</string>
     <string name="title_activity_horario_no_consultar">HorarioNoConsultarActivity</string>
 
-    // STRING DE GESTIONES DE TIPO DE ACTIVIDAD
+    <!-- STRING DE GESTIONES DE TIPO DE ACTIVIDAD-->
 
     <string name="title_activity_tipo_ainsertar">TipoAInsertarActivity</string>
     <string name="title_activity_tipo_aeliminar">TipoAEliminarActivity</string>
     <string name="title_activity_tipo_aactualizar">TipoAActualizarActivity</string>
     <string name="title_activity_tipo_aconsultar">TipoAConsultarActivity</string>
+
+    <!-- STRING DE GESTIONES DE TIPO DE Docente-->
+
+    <string name="activity_docente_insertar">DocenteInsertarActivity</string>
+    <string name="activity_docente_eliminar">DocenteEliminarActivity</string>
+    <string name="activity_docente_actualizar">DocenteModificarActivity</string>
+    <string name="activity_docente_consultar">DocenteConsultarActivity</string>
 
     <!-- String de las funciones para los menu -->
 
@@ -41,7 +49,7 @@
     <string name="ciclo_menu">Función a Ejecutar Ciclo</string>
     <string name="horario_no_menu">Función a Ejecutar HorarioNo</string>
     <string name="tipo_amenu">Función a Ejecutar Tipo</string>
-
+    <string name="docente_menu">Funcion a Ejecutar Docente</string>
     <!-- STRING DE LAS FUNCIONALIDADES EN LOS MENUS -->
 
     <string name="insertar_registro">Insertar Registro</string>
@@ -61,4 +69,13 @@
     <string name="consultar">Consultar</string>
     <string name="limpiar">Limpiar</string>
     <string name="opciones">Opciones:</string>
+
+    <!-- STRING DE LA INFORMACION  A INGRESAR DOCENTE -->
+
+    <string name="id_docente">Codigo Docente: </string>
+    <string name="nombre">Nombre: </string>
+    <string name="apellido">Apellido: </string>
+    <string name="dui">Dui: </string>
+    <string name="genero">Genero: </string>
+    <string name="email">Email: </string>
 </resources>
