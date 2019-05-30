@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import sv.edu.ues.fia.eisi.proyectotarea.modelos.Actividad;
 import sv.edu.ues.fia.eisi.proyectotarea.modelos.Ciclo;
+import sv.edu.ues.fia.eisi.proyectotarea.modelos.Docente;
 import sv.edu.ues.fia.eisi.proyectotarea.modelos.HorarioNo;
 
 
@@ -316,10 +317,25 @@ public class ControlDBProyecto {
         final String[] VHciclo = {"12017", "22107"};
         final String[] VHfecha = {"2/03", "3/08"};
 
+       /* //Sofia
+        final String[] VDiddocente = {"0001", "0002"};
+        final String[] VDnombre = {"docente 1", "docente 2"};
+        final String[] VDapellido = {"parcial", "parcial"};
+        final String[] VDdui = {"12017", "22017"};
+        final String[] VDgenero = {"1", "2"};
+        final String[] VDemail = {"parcial@intro", "parcial@repe"};
+
+*/
         abrir();
         db.execSQL("DELETE FROM actividad");
         db.execSQL("DELETE FROM ciclo");
         db.execSQL("DELETE FROM horarioNo");
+      /*
+        //sofia
+        db.execSQL("DELETE FROM docente");
+        db.execSQL("DELETE FROM cargo");
+        db.execSQL("DELETE FROM solicitud");
+        */
 
         Actividad actividad = new Actividad();
         for (int i = 0; i < 3; i++) {
@@ -344,6 +360,19 @@ public class ControlDBProyecto {
             horarioNo.setFecha(VHfecha[i]);
             insertar(horarioNo);
         }
+/*
+        //Sofia
+        Docente docente = new Docente();
+        for (int i = 0; i < 6; i++) {
+            docente.setIdDocente(VDiddocente[i]);
+            docente.setNombre(VDnombre[i]);
+            docente.setApellido(VDapellido[i]);
+            docente.setDui(VDdui[i]);
+            docente.setGenero(VDgenero[i]);
+            docente.setEmail(VDemail[i]);
+            insertar(docente);
+        }*/
+
         cerrar();
         return "Guardado Correctamente";
 
