@@ -19,6 +19,12 @@ public class ControlDBProyecto {
     private static final String[] camposHorarioNo = new String []
             {"ciclo","fecha"};
 
+    private static final String[] camposDocente = new String []{"idDocente","nombre", "apellido", "dui", "genero", "email"};
+    private static final String[] camposCargo = new String []{"idCargo","tipoDocente", "actividadDescribir"};
+    private static final String[] camposSolicitud = new String []{"idSolicitud","descripcion", "capacidad", "fecha"};
+    private static final String[] camposCargaDocente = new String []{"idCargaDocente","nombreCarga", "idAsignaturaPesum", "idCiclo", "idSolcicitud",  "idDispoCiclo"};
+
+
     private final Context context;
     private DatabaseHelper DBHelper;
     private SQLiteDatabase db;
@@ -42,6 +48,10 @@ public class ControlDBProyecto {
                 db.execSQL("CREATE TABLE actividad(ciclo VARCHAR(7) NOT NULL PRIMARY KEY,detalle VARCHAR(30),actividad VARCHAR(30));");
                 db.execSQL("CREATE TABLE ciclo(ciclo VARCHAR(6) NOT NULL PRIMARY KEY,detalle VARCHAR(30));");
                 db.execSQL("CREATE TABLE horarioNo(ciclo VARCHAR(7) NOT NULL ,fecha DATE,PRIMARY KEY(ciclo));");
+                db.execSQL("CREATE TABLE docente(idDocente VARCHAR(4) NOT NULL PRIMARY KEY, nombre VARCHAR(30) NOT NULL, apellido VARCHAR(30)NOT NULL, dui VARCHAR(10), genero VARCHAR(30), email VARCHAR(30));");
+                db.execSQL("CREATE TABLE cargo(idCargo VARCHAR(4) NOT NULL PRIMARY KEY, tipoDocente VARCHAR(25), actividadDescribir VARCHAR(30));");
+                db.execSQL("CREATE TABLE solicitud(idSolicitud VARCHAR(4) NOT NULL PRIMARY KEY, descripcion VARCHAR(30), capacidad VARCHAR(4), fecha DATE);");
+                db.execSQL("CREATE TABLE cargaDocente(idCargaDocente VARCHAR(4) NOT NULL PRIMARY KEY,  nombreCarga VARCHAR(20), idAsignaturaPesum VARCHAR(4), idCiclo VARCHAR(6), idSolcicitud VARCHAR(4), idDispoCiclo VARCHAR(4));");
             }catch(SQLException e){
                 e.printStackTrace();
             }
