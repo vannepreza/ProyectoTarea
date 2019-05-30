@@ -7,8 +7,11 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.net.PortUnreachableException;
+
 import sv.edu.ues.fia.eisi.proyectotarea.modelos.Actividad;
 import sv.edu.ues.fia.eisi.proyectotarea.modelos.Ciclo;
+import sv.edu.ues.fia.eisi.proyectotarea.modelos.Docente;
 import sv.edu.ues.fia.eisi.proyectotarea.modelos.HorarioNo;
 
 public class ControlDBProyecto {
@@ -18,6 +21,8 @@ public class ControlDBProyecto {
             {"ciclo","detalle"};
     private static final String[] camposHorarioNo = new String []
             {"ciclo","fecha"};
+    private  static final String[] camposDocente = new String[] {"IdDocente", "Nombre", "Apellido", "Dui", "Genero", "Email"};
+
 
     private final Context context;
     private DatabaseHelper DBHelper;
@@ -32,6 +37,8 @@ public class ControlDBProyecto {
         private static final String BASE_DATOS ="grupo08.s3db";
         private static final int VERSION = 1;
 
+        private static final String DROP_TABLE4 = "DROP TABLE IF EXISTS docente;";
+
         public DatabaseHelper(Context context) {
             super(context, BASE_DATOS, null, VERSION);
         }
@@ -42,6 +49,8 @@ public class ControlDBProyecto {
                 db.execSQL("CREATE TABLE actividad(ciclo VARCHAR(7) NOT NULL PRIMARY KEY,detalle VARCHAR(30),actividad VARCHAR(30));");
                 db.execSQL("CREATE TABLE ciclo(ciclo VARCHAR(6) NOT NULL PRIMARY KEY,detalle VARCHAR(30));");
                 db.execSQL("CREATE TABLE horarioNo(ciclo VARCHAR(7) NOT NULL ,fecha DATE,PRIMARY KEY(ciclo));");
+
+                db.execSQL("CREATE TABLE docente(idDocente VARCHAR(7) NOT NULL PRIMARY KEY , nombre VARCHAR(30) NOT NULL, apellido VARCHAR(30)NOT NULL, dui VARCHAR(10) NOT NULL, genero VARCHAR(1), email VARCHAR(30));");
             }catch(SQLException e){
                 e.printStackTrace();
             }
@@ -49,6 +58,8 @@ public class ControlDBProyecto {
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 // TODO Auto-generated method stub
+
+            db.execSQL(DROP_TABLE4);
     }
 }
     public void abrir() throws SQLException{
@@ -114,6 +125,24 @@ public class ControlDBProyecto {
 
     // Fin de insertar  Horario no Habil
 
+    //INICIO DE INSERTAR DOCENTE
+
+    public String insertarDocente (Docente docente){
+
+        String regInsertados="Registro Insertado Nº: ";
+        long contador=0;
+            ContentValues doc = new ContentValues();
+            doc.put("idDocente", docente.getIdDocente());
+            doc.put("nombre", docente.getNombre());
+            doc.put("apellido", docente.getApellido());
+            doc.put("dui", docente.getDui());
+            doc.put("genero", docente.getGenero());
+            doc.put("email", docente.getEmail());
+            contador=db.insert("docente", null, doc);
+            regInsertados=regInsertados+contador;
+        return regInsertados;
+    }
+    //FIN DE INSERTAR DOCENTE
 
 
     // Inicio de Actualizar Actividad
@@ -300,6 +329,21 @@ public class ControlDBProyecto {
                 return false;
             }
 
+            case 6:{
+                Docente doc2 = (Docente)dato;
+                String[] id = {doc2.getIdDocente()};
+                abrir();
+                Cursor c2 = db.query("docente", null, "idDocente = ?", id, null, null, null);
+                if (c2.moveToFirst()){
+                    //se encontro alumno
+                    return true;
+                }
+                return false;
+            }//fin case 6
+
+
+
+
             default:
                 return false;
         }
@@ -321,11 +365,20 @@ public class ControlDBProyecto {
         final String [] VHciclo = { "12016", "22016"};
         final String [] VHfecha = { "madre", "padre"};
 
+       /* final String[] VAidDocent = {"1", "2", "3"};
+        final String[] VAnombre = {"Maria", "Adilia", "Marcos"};
+        final String[] VAapellido={"Morales", "Martinez", "Rosales"};
+        final String[] Vadui = {"1234567892", "345123907", "4352617829"};
+        final String[] VAgenero = {"F", "F", "M"};
+        final String[] VAemail = {"maria@gmail.com", "adilia@gmail.com", "marcos@gmail.com"};*/
+
+
 
         abrir();
         db.execSQL("DELETE FROM actividad");
         db.execSQL("DELETE FROM ciclo");
         db.execSQL("DELETE FROM horarioNo");
+       // db.execSQL("DELETE FROM docente");
 
         Actividad actividad = new Actividad();
 
@@ -349,7 +402,20 @@ public class ControlDBProyecto {
 
         }
 
+       /* Docente docente = new Docente();
+        for(int i=0;i<6;i++){
+
+            docente.setIdDocente(VAidDocent[i]);
+           docente.setNombre(VAnombre[i]);
+           docente.setApellido(VAapellido[i]);
+           docente.setDui(Vadui[i]);
+           docente.setGenero(VAgenero[i]);
+           docente.setEmail(VAemail[i]);
+           insertarDocente(docente);
+
+        }*/
+
         cerrar();
         return "Guardo Correctamente";
     }
-        }
+}
