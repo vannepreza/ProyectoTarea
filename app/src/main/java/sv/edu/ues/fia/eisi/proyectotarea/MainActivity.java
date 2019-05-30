@@ -11,23 +11,23 @@ import android.widget.Toast;
 import sv.edu.ues.fia.eisi.proyectotarea.baseDatos.ControlDBProyecto;
 
 public class MainActivity extends ListActivity {
-    String[] menu={"Tabla Actividad","Tabla Ciclo","Tabla Horario No", "Tabla Tipo Actividad", "LLenar Base de Datos"};
+    String[] menu={"Tabla Actividad","Tabla Ciclo","Tabla Horario No", "Tabla Tipo Actividad","Tabla Local","Tabla Horario","Tabla Disponiblidad Horario","Tabla Disponibiliad Ciclo","Tabla Tipo Local", "LLenar Base de Datos"};
             String[]
-    activities={"ActividadMenuActivity","CicloMenuActivity","HorarioNoMenuActivity", "TipoAMenuActivity"};
+    activities={"ActividadMenuActivity","CicloMenuActivity","HorarioNoMenuActivity","TipoAMenuActivity","LocalMenuActivity","HorarioMenuActivity","DispHorarioMenuActivity","DispCicloMenuActivity","TipoLocalMenuActivity"};
 
     ControlDBProyecto BDhelper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setListAdapter(new ArrayAdapter<String>(this,
+        setListAdapter(new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, menu));
         BDhelper=new ControlDBProyecto(this);
     }
     @Override
     protected void onListItemClick(ListView l,View v,int position,long id){
         super.onListItemClick(l, v, position, id);
-        if(position!=4){
+        if(position!=9){
             String nombreValue=activities[position];
             try{
                 Class<?>
