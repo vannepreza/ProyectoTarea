@@ -4,28 +4,29 @@
     android:layout_height="wrap_content"
     android:paddingTop="30dip"
     android:stretchColumns="1" >
+
     <TableRow>
-        <TextView android:text="@string/id_docente"/>
+        <TextView android:text="@string/id_docente" />
         <EditText
             android:id="@+id/editidDocente"
             android:inputType="text"
-            android:maxLength="7" />
+            android:maxLength="50" />
     </TableRow>
+
     <TableRow>
         <TextView android:text="@string/nombre" />
         <EditText
             android:id="@+id/editNombre"
             android:inputType="text"
-            android:maxLength="30" />
+            android:maxLength="50" />
     </TableRow>
     <TableRow>
         <TextView android:text="@string/apellido" />
         <EditText
             android:id="@+id/editApellido"
             android:inputType="text"
-            android:maxLength="30" />
+            android:maxLength="70" />
     </TableRow>
-
     <TableRow>
         <TextView android:text="@string/dui" />
         <EditText
@@ -33,7 +34,6 @@
             android:inputType="text"
             android:maxLength="10" />
     </TableRow>
-
     <TableRow>
         <TextView android:text="@string/genero" />
         <EditText
@@ -41,7 +41,6 @@
             android:inputType="text"
             android:maxLength="1" />
     </TableRow>
-
     <TableRow>
         <TextView android:text="@string/email" />
         <EditText
@@ -51,15 +50,17 @@
     </TableRow>
 
 
-    <TableRow>
-        <TextView android:text="@string/opciones" />
-    </TableRow>
-    <TableRow>
-        <Button
-            android:onClick="insertar"
-            android:text="@string/insertar" />
-        <Button
-            android:onClick="limpiarTexto"
-            android:text="@string/limpiar" />
-    </TableRow>
+    <Button
+        android:id="@+id/insertDoc"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:text="Insertar"
+        android:onClick="insertDoc"/>
+
+    <Button
+        android:id="@+id/limpiar"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:text="Limpiar"
+        android:onClick="limpiar"/>
 </TableLayout>

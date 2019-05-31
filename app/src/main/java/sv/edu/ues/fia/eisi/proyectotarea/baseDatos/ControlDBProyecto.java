@@ -8,9 +8,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import sv.edu.ues.fia.eisi.proyectotarea.modelos.Actividad;
+import sv.edu.ues.fia.eisi.proyectotarea.modelos.CargaDocente;
+import sv.edu.ues.fia.eisi.proyectotarea.modelos.Cargo;
 import sv.edu.ues.fia.eisi.proyectotarea.modelos.Ciclo;
 import sv.edu.ues.fia.eisi.proyectotarea.modelos.Docente;
 import sv.edu.ues.fia.eisi.proyectotarea.modelos.HorarioNo;
+import sv.edu.ues.fia.eisi.proyectotarea.modelos.Solicitud;
 
 
 public class ControlDBProyecto {
@@ -123,6 +126,38 @@ public class ControlDBProyecto {
 
     // Fin de insertar  Horario no Habil
 
+    //Inicio de insertar Docente
+    public String insertar(Docente docente){
+
+        String regInser ="Docente insertado Nº: ";
+        long cont = 0;
+
+            ContentValues doce = new ContentValues();
+            doce.put("idDocente", docente.getIdDocente());
+            doce.put("nombre", docente.getNombre());
+            doce.put("apellido", docente.getApellido());
+            doce.put("dui", docente.getDui());
+            doce.put("genero", docente.getGenero());
+            doce.put("email", docente.getEmail());
+            cont = db.insert("docente", null, doce);
+            {regInser = regInser+cont;}
+        return  regInser;
+
+    }
+    //fin de insertar docente
+
+    //Inicio de insertar Carga docente
+    public String insertar(CargaDocente cargaDocente){return null;}
+    //fin de insertar carga docente
+
+    //Inicio de insertar Cargo
+    public String insertar(Cargo cargo){return null;}
+    //fin de insertar cargo
+
+    //Inicio de insertar Solicitud
+    public String insertar(Solicitud solicitud){return null;}
+    //fin de insertar solicitud
+
 
     // Inicio de Actualizar Actividad
 
@@ -160,6 +195,21 @@ public class ControlDBProyecto {
 
     // Fin de Actualizar Horario No Habil
 
+    //inicio de actualizar docente
+    public String actualizar(Docente docente){return  null;}
+    //fin de actualizar docente
+
+    //inicio de actualizar carga docente
+    public String actualizar(CargaDocente cargaDocente){return  null;}
+    //fin de actualizar carga docente
+
+    //inicio de actualizar solicitud
+    public String actualizar(Solicitud solicitud){return  null;}
+    //fin de actualizar solicitud
+
+    //inicio de actualizar cargo
+    public String actualizar(Cargo cargo){return  null;}
+    //fin de actualizar cargo
 
     // Inicio de Eliminar Actividad
 
@@ -193,6 +243,22 @@ public class ControlDBProyecto {
     }
 
     // Fin sw Eliminar Horario No Habil
+
+    //inicio de eliminar docente
+    public String eliminar(Docente docente){return null;}
+    //fin de eliminar docente
+
+    //inicio de eliminar carga docente
+    public String eliminar(CargaDocente cargaDocente){return null;}
+    //fin de eliminar carga docente
+
+    //inicio de eliminar solicitud
+    public String eliminar(Solicitud solicitud){return null;}
+    //fin de eliminar solicitud
+
+    //inicio de eliminar cargo
+    public String eliminar(Cargo cargo){return null;}
+    //fin de eliminar cargo
 
 
     // Inicio de Consultar Actividad
@@ -231,6 +297,22 @@ public class ControlDBProyecto {
     }
 
     // Fin de Consultar Horario No Habil
+
+    //Inicio consultar docente
+    public Docente consultarDocente(String docente){return null;}
+    //fin de consultar docente
+
+    //Inicio consultar carga docente
+    public CargaDocente consultarCargaDocente(String cargadocente){return null;}
+    //fin de consultar carga docente
+
+    //Inicio consultar solicitud
+    public Solicitud consultarSolicitud(String solicitud){return null;}
+    //fin de consultar solicitud
+
+    //Inicio consultar cargo
+    public Cargo consultarCargo(String cargo){return null;}
+    //fin de consultar cargo
 
 
     //Verificacion de la integridad de los datos
@@ -298,6 +380,59 @@ public class ControlDBProyecto {
                 }
                 return false;
             }
+            case 6: {
+                //verificar que exista docente
+                Docente docente = (Docente) dato;
+                String[] id = {docente.getIdDocente()};
+                abrir();
+                Cursor c = db.query("docente", null, "idDocente = ?", id, null, null, null);
+                if (c.moveToFirst()){
+                    //se encontro docente
+                    return true;
+                }
+                //No se encontro docente
+                return false;
+            }
+            case 7: {
+                //verificar que exista cargo
+                Cargo cargo = (Cargo) dato;
+                String[] id = {cargo.getIdCargo()};
+                abrir();
+                Cursor c = db.query("cargo", null, "idCargo = ?", id, null, null, null);
+                if (c.moveToFirst()){
+                    //se encontro cargo
+                    return true;
+                }
+                //No se encontro cargo
+                return false;
+            }
+            case 8: {
+                //verificar que exista solicitud
+                Solicitud solicitud = (Solicitud) dato;
+                String[] id = {solicitud.getIdSolicitud()};
+                abrir();
+                Cursor c = db.query("solicitud", null, "idSolicitud = ?", id, null, null, null);
+                if (c.moveToFirst()){
+                    //se encontro solicitud
+                    return true;
+                }
+                //No se encontro solicitud
+                return false;
+            }
+
+            case 9: {
+                //verificar que exista carga docente
+                CargaDocente cargaDocente = (CargaDocente) dato;
+                String[] id = {cargaDocente.getIdCargaDocente()};
+                abrir();
+                Cursor c = db.query("cargaDocente", null, "idCargaDocente = ?", id, null, null, null);
+                if (c.moveToFirst()){
+                    //se encontro carga docente
+                    return true;
+                }
+                //No se encontro carga docente
+                return false;
+            }
 
             default:
                 return false;
@@ -317,7 +452,7 @@ public class ControlDBProyecto {
         final String[] VHciclo = {"12017", "22107"};
         final String[] VHfecha = {"2/03", "3/08"};
 
-       /* //Sofia
+        //Sofia
         final String[] VDiddocente = {"0001", "0002"};
         final String[] VDnombre = {"docente 1", "docente 2"};
         final String[] VDapellido = {"parcial", "parcial"};
@@ -325,11 +460,17 @@ public class ControlDBProyecto {
         final String[] VDgenero = {"1", "2"};
         final String[] VDemail = {"parcial@intro", "parcial@repe"};
 
-*/
+
         abrir();
         db.execSQL("DELETE FROM actividad");
         db.execSQL("DELETE FROM ciclo");
         db.execSQL("DELETE FROM horarioNo");
+        db.execSQL("DELETE FROM docente");
+        db.execSQL("DELETE FROM solicitud");
+        db.execSQL("DELETE FROM cargaDocente");
+        db.execSQL("DELETE FROM cargo");
+
+
       /*
         //sofia
         db.execSQL("DELETE FROM docente");
@@ -360,7 +501,7 @@ public class ControlDBProyecto {
             horarioNo.setFecha(VHfecha[i]);
             insertar(horarioNo);
         }
-/*
+
         //Sofia
         Docente docente = new Docente();
         for (int i = 0; i < 6; i++) {
@@ -371,7 +512,7 @@ public class ControlDBProyecto {
             docente.setGenero(VDgenero[i]);
             docente.setEmail(VDemail[i]);
             insertar(docente);
-        }*/
+        }
 
         cerrar();
         return "Guardado Correctamente";

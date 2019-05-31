@@ -2,7 +2,7 @@ package sv.edu.ues.fia.eisi.proyectotarea.modelos;
 
 public class CargaDocente {
 
-    private int idCargaDocente;
+    private String idCargaDocente;
     private String nombreCarga;
     private int idCiclo;
     private int idSolicitud;
@@ -14,8 +14,9 @@ public class CargaDocente {
 
     }
 
-    public CargaDocente(int idCargaDocente, int ciclo, int idSolicitud, int idDocente, int idAsignaturaPesum, int idDispCiclo){
+    public CargaDocente(String idCargaDocente, String nombreCarga, int ciclo, int idSolicitud, int idDocente, int idAsignaturaPesum, int idDispCiclo){
         this.idCargaDocente = idCargaDocente;
+        this.nombreCarga = nombreCarga;
         this.idCiclo = ciclo;
         this.idSolicitud = idSolicitud;
         this.idDocente= idDocente;
@@ -23,8 +24,8 @@ public class CargaDocente {
         this.idDisponibilidadCiclo = idDispCiclo;
     }
 
-    public int getIdCargaDocente(){return idCargaDocente;}
-    public void setIdCargaDocente(int idCargaDocente){ this.idCargaDocente = idCargaDocente;}
+    public String getIdCargaDocente(){return idCargaDocente;}
+    public void setIdCargaDocente(String idCargaDocente){ this.idCargaDocente = idCargaDocente;}
 
     public String getNombreCarga(){return  nombreCarga;}
     public void setNombreCarga(String nomCar){this.nombreCarga = nomCar;}

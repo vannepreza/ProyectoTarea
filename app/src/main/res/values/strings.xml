@@ -9,6 +9,9 @@
     <string name="title_activity_horario_no_menu">HorarioNoMenuActivity</string>
     <string name="title_activity_tipo_amenu">TipoAMenuActivity</string>
     <string name="title_activity_docente_menu">DocenteMenuActivity</string>
+    <string name="title_activity_carga_docente_menu">CargaDocenteMenuActivity</string>
+    <string name="title_activity_cargo_menu">CargoMenuActivity</string>
+    <string name="title_activity_solicitud_menu">SolicitudMenuActivity</string>
 
     <!-- STRING DE LAS GESTIONES DE ACTIVIDAD -->
     <string name="title_activity_actividad_insertar">ActividadInsertarActivity</string>
@@ -36,12 +39,28 @@
     <string name="title_activity_tipo_aactualizar">TipoAActualizarActivity</string>
     <string name="title_activity_tipo_aconsultar">TipoAConsultarActivity</string>
 
-    <!-- STRING DE GESTIONES DE TIPO DE Docente-->
+    <!-- STRING DE GESTIONES DE DOCENTE-->
 
     <string name="activity_docente_insertar">DocenteInsertarActivity</string>
     <string name="activity_docente_eliminar">DocenteEliminarActivity</string>
-    <string name="activity_docente_actualizar">DocenteModificarActivity</string>
+    <string name="activity_docente_actualizar">DocenteActualizarActivity</string>
     <string name="activity_docente_consultar">DocenteConsultarActivity</string>
+
+    <!-- STRING DE GESTIONES DE  CARGA DOCENTE-->
+    <string name="activity_carga_docente_insertar">CargaDocenteInsertarActivity</string>
+    <string name="activity_carga_docente_eliminar">CargaDocenteEliminarActivity</string>
+    <string name="activity_carga_docente_actualizar">CargaDocenteActualizarActivity</string>
+    <string name="activity_carga_docente_consultar">CargaDocenteConsultarActivity</string>
+
+    <!-- STRING DE GESTIONES DE CARGO-->
+    <string name="activity_cargo_insertar">CargoInsertarActivity</string>
+
+
+    <!-- STRING DE GESTIONES DE SOLICITUD-->
+    <string name="activity_solicitud_insertar">SolicitudInsertarActivity</string>
+    <string name="activity_solicitud_eliminar">SolicitudEliminarActivity</string>
+    <string name="activity_solicitud_actualizar">SolicictudActualizarActivity</string>
+    <string name="activity_solicitud_consultar">SolicitudConsultarActivity</string>
 
     <!-- String de las funciones para los menu -->
 
@@ -78,4 +97,25 @@
     <string name="dui">Dui: </string>
     <string name="genero">Genero: </string>
     <string name="email">Email: </string>
+
+    <!-- STRING DE LA INFORMACION  A INGRESAR CARGA DOCENTE -->
+    <string name="id_carga_docente">Codigo Carga Docente: </string>
+    <string name="nombre_carga">Carga: </string>
+    <string name="id_asig_pesum">Codigo Asignatura: </string>
+    <string name="id_ciclo">Codigo Ciclo: </string>
+    <string name="id_solici">Codigo Solicitud: </string>
+    <string name="id_docent">Codigo Docente: </string>
+    <string name="id_dispo_ciclo">Codigo Disponibilidad: </string>
+
+    <!-- STRING DE LA INFORMACION  A INGRESAR SOLICITUD -->
+    <string name="id_solicitud">Codigo Solicitud: </string>
+    <string name="descripcion">Descripcion: </string>
+    <string name="capacidad">Capacidad: </string>
+    <string name="fecha_soli">Fecha: </string>
+
+    <!-- STRING DE LA INFORMACION  A INGRESAR CARGO -->
+    <string name="id_cargo">Codigo Cargo: </string>
+    <string name="tipo_docente">Cargo: </string>
+    <string name="descripcion_cargo">Descripcion: </string>
+
 </resources>
