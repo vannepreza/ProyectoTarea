@@ -54,11 +54,17 @@
     <string name="ciclo">Ciclo</string>
     <string name="detalle">Detalle</string>
     <string name="actividad">Actividad</string>
-    <string name="fecha"></string>
+    <string name="fecha">Fecha</string>
     <string name="insertar">Insertar</string>
     <string name="eliminar">Eliminar</string>
     <string name="actualizar">Actualizar</string>
     <string name="consultar">Consultar</string>
     <string name="limpiar">Limpiar</string>
     <string name="opciones">Opciones:</string>
+
+    <string name="idLocal">Id Locales</string>  <!--String Locales-->
+    <string name="ubicacion">Ubicacion</string>
+    <string name="capacidad">Capacidad</string>
+    <string name="nombre">Nombre</string>
+
 </resources>
