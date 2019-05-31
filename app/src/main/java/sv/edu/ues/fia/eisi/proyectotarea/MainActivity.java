@@ -20,7 +20,7 @@ public class MainActivity extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setListAdapter(new ArrayAdapter<>(this,
+        setListAdapter(new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, menu));
         BDhelper=new ControlDBProyecto(this);
     }

@@ -15,6 +15,7 @@ import sv.edu.ues.fia.eisi.proyectotarea.modelos.Docente;
 import sv.edu.ues.fia.eisi.proyectotarea.modelos.HorarioNo;
 import sv.edu.ues.fia.eisi.proyectotarea.modelos.Solicitud;
 
+import sv.edu.ues.fia.eisi.proyectotarea.modelos.Local;
 
 public class ControlDBProyecto {
     private static final String[] camposActividad = new String[]{"ciclo", "detalle", "actividad"};
@@ -26,6 +27,10 @@ public class ControlDBProyecto {
     private static final String[] camposCargaDocente = new String[]{"idCargaDocente", "nombreCarga", "idAsignaturaPesum", "idCiclo", "idSolcicitud", "idDispoCiclo"};
 
 
+    private static final String[] camposHorario = new String []{"idHoraio","horaInicio","horaFin"};
+    private static final String[] camposDispHorario = new String []{"idDispHoraio","horaInicio","idHorario","idLocal"};
+    private static final String[] camposLocal = new String []{"idLocal","ubicacion","capacidad","nombre"};
+
     private final Context context;
     private DatabaseHelper DBHelper;
     private SQLiteDatabase db;
@@ -36,8 +41,12 @@ public class ControlDBProyecto {
         DBHelper = new DatabaseHelper(context);
     }
 
+
     private static class DatabaseHelper extends SQLiteOpenHelper {
         private static final String BASE_DATOS = "grupo08.s3db";
+
+    private static class DatabaseHelper extends SQLiteOpenHelper{
+        private static final String BASE_DATOS ="grupo08.s3db";
         private static final int VERSION = 1;
 
         public DatabaseHelper(Context context) {
@@ -55,6 +64,13 @@ public class ControlDBProyecto {
                 db.execSQL("CREATE TABLE solicitud(idSolicitud VARCHAR(4) NOT NULL PRIMARY KEY, descripcion VARCHAR(30), capacidad VARCHAR(4), fecha DATE);");
                 db.execSQL("CREATE TABLE cargaDocente(idCargaDocente VARCHAR(4) NOT NULL PRIMARY KEY,  nombreCarga VARCHAR(20), idAsignaturaPesum VARCHAR(4), idCiclo VARCHAR(6), idSolcicitud VARCHAR(4), idDispoCiclo VARCHAR(4));");
             } catch (SQLException e) {
+
+                //LOCAL,HORARIO, DISPHORARIO
+                db.execSQL("CREATE TABLE horaio(idHorario INT NOT NULL PRIMARY KEY, horaInicio INT, horarioFin INT);");
+                db.execSQL("CREATE TABLE local(idLocal INT NOT NULL PRIMARY KEY, ubicacion VARCHAR(80), capacidad INT, nombre VARCHAR(50));");
+                db.execSQL("CREATE TABLE dispHorario(idDispHorario int NOT NULL, horaInicio int, PRIMARY KEY(idDispHorario, idHorario, idLocal));");
+
+            }catch(SQLException e){
                 e.printStackTrace();
             }
         }
@@ -321,6 +337,69 @@ public class ControlDBProyecto {
     //Inicio consultar cargo
     public Cargo consultarCargo(String cargo){return null;}
     //fin de consultar cargo
+    //INSERTAR LOCAL
+    public String insertar(Local local){
+        String regInsertados="Registro Insertado N°= ";
+        long contador=0;
+
+        ContentValues loc = new ContentValues();
+        loc.put("idLocal", local.getIdLocal());
+        loc.put("ubicacion", local.getUbicacion());
+        loc.put("capacidad", local.getCapacidad());
+        loc.put("nombre", local.getNombre());
+        contador=db.insert("local", null, loc);
+        if(contador==-1 || contador==0) {
+            regInsertados= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        } else {
+            regInsertados=regInsertados+contador;
+        }
+        return regInsertados;
+    }
+
+    //CONSULTAR LOCAL
+    public Local consultarLocal(String idLocal){
+        String[] id = {idLocal};
+        Cursor cursor = db.query("local", camposLocal, "idLocal = ?", id, null, null, null);
+        if(cursor.moveToFirst()){
+            Local local = new Local();
+            local.setIdLocal(Integer.parseInt(cursor.getString(0)));
+            local.setUbicacion(cursor.getString(1));
+            local.setCapacidad(Integer.parseInt(cursor.getString(2)));
+            local.setNombre(cursor.getString(3));
+
+            return local;
+        }else{
+            return null;
+        }
+    }
+
+    //ACTUALIZAR LOCAL
+    public String actualizar(Local local){
+        if(verificarIntegridad(local, 4)){  //Relacion de 4 por ser local
+            String[] id = {String.valueOf(local.getIdLocal())};
+            ContentValues cv = new ContentValues();
+            cv.put("ubicacion", local.getUbicacion());
+            cv.put("capacidad", local.getCapacidad());
+            cv.put("nombre", local.getNombre());
+            db.update("local", cv, "idLocal = ?", id);
+            return "Registro Actualizado Correctamente";
+        }else{
+            return "Registro con carnet " + local.getIdLocal() + " no existe";
+        }
+    }
+
+    //ELIMINAR LOCAL
+    public String eliminar(Local local){
+        String regAfectados="filas afectadas= ";
+        int contador=0;
+        if (verificarIntegridad(local,3)) {
+            contador+=db.delete("dispHorario", "idLocal='"+local.getIdLocal()+"'", null);
+        }
+        contador+=db.delete("local", "idLocal='"+local.getIdLocal()+"'", null);
+        regAfectados+=contador;
+        return regAfectados;
+    }
+
 
 
     //Verificacion de la integridad de los datos
