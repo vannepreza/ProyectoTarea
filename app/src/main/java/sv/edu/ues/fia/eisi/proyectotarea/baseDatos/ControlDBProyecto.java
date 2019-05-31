@@ -86,6 +86,7 @@ public class ControlDBProyecto {
         act.put("detalle", actividad.getDetalle());
         act.put("actividad", actividad.getActividad());
 
+
         contador = db.insert("actividad", null, act);
 
         if (contador == -1 || contador == 0) {
@@ -129,19 +130,26 @@ public class ControlDBProyecto {
     //Inicio de insertar Docente
     public String insertar(Docente docente){
 
-        String regInser ="Docente insertado Nº: ";
-        long cont = 0;
+        String regInsertados = "Registro Insertado Nº= ";
+        long contador = 0;
+        ContentValues act = new ContentValues();
+        act.put("idDocente", docente.getIdDocente());
+        act.put("nombre", docente.getNombre());
+        act.put("apellido", docente.getApellido());
+        act.put("dui", docente.getDui());
+        act.put("genero", docente.getGenero());
+        act.put("email", docente.getEmail());
 
-            ContentValues doce = new ContentValues();
-            doce.put("idDocente", docente.getIdDocente());
-            doce.put("nombre", docente.getNombre());
-            doce.put("apellido", docente.getApellido());
-            doce.put("dui", docente.getDui());
-            doce.put("genero", docente.getGenero());
-            doce.put("email", docente.getEmail());
-            cont = db.insert("docente", null, doce);
-            {regInser = regInser+cont;}
-        return  regInser;
+
+
+        contador = db.insert("docente", null, act);
+
+        if (contador == -1 || contador == 0) {
+            regInsertados = "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        } else {
+            regInsertados = regInsertados + contador;
+        }
+        return regInsertados;
 
     }
     //fin de insertar docente
