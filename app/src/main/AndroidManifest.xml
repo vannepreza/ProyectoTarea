@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AsignaturaInsertarActivity"></activity>
+        <activity android:name=".CarreraMenuActivity"></activity>
+        <activity android:name=".PensumMenuActivity" />
+        <activity android:name=".AsignaturaMenuActivity" />
+        <activity android:name=".EscuelaMenuActivity" />
+        <activity android:name=".modelos.CarreraMenuActivity" />
+        <activity android:name=".AsignaturaInsertarActivity" />
         <activity android:name=".PensumEliminarActivity" />
         <activity android:name=".PensumActualizarActivity" />
         <activity android:name=".PensumConsultarActivity" />
