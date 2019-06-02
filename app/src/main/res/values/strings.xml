@@ -62,6 +62,49 @@
     <string name="activity_solicitud_actualizar">SolicictudActualizarActivity</string>
     <string name="activity_solicitud_consultar">SolicitudConsultarActivity</string>
 
+
+    <!-- String Carrera, Escuela, Asignatura, Pensum -->
+    <string name="title_activity_carrera_menu">CarreraMenuActivity</string>
+    <string name="title_activity_pensum_menu">PensumMenuActivity</string>
+    <string name="title_activity_escuela_menu">EscuelaMenuActivity</string>
+    <string name="title_activity_carrera_insertar">CarreraInsertarActivity</string>
+    <string name="title_activity_carrera_eliminar">CarreraEliminarActivity</string>
+    <string name="title_activity_carrera_actualizar">CarreraActualizarActivity</string>
+    <string name="title_activity_carerra_consultar">CarrerraConsultarActivity</string>
+    <string name="title_activity_pensum_insertar">PensumInsertarActivity</string>
+    <string name="title_activity_pensum_eliminar">PensumEliminarActivity</string>
+    <string name="title_activity_pensum_actualizar">PensumActualizarActivity</string>
+    <string name="title_activity_pensum_consultar">PensumConsultarActivity</string>
+    <string name="title_activity_escuela_insertar">EscuelaInsertarActivity</string>
+    <string name="title_activity_escuela_eliminar">EscuelaEliminarActivity</string>
+    <string name="title_activity_escuela_actualizar">EscuelaActualizarActivity</string>
+    <string name="title_activity_escuela_consultar">EscuelaConsultarActivity</string>
+    <string name="title_activity_asignatura_insertar">AsignaturaInsertarActivity</string>
+    <string name="title_activity_asignatura_consultar">AsignaturaConsultarActivity</string>
+
+    <string name="carrera_menu">Función a Ejecutar Carrera</string>
+    <string name="pensum_menu">Función a Ejecutar Pensum</string>
+    <string name="escuela_menu">Función a Ejecutar Escuela</string>
+
+
+    <string name="id_carrera">idCarrera</string>
+    <string name="nombre_carrera">nombreCarrera</string>
+    <string name="id_pensum">idPensum</string>
+    <string name="nombre_materia">NombreMateria</string>
+    <string name="id_escuela">idEscuela</string>
+    <string name="nombre_escuela">nombreEscuela</string>
+    <string name="id_asignatura">idAsignatura</string>
+    <string name="nombre_asignatura">nombreAsignatura</string>
+    <string name="Insertar">Insertar</string>
+    <string name="Eliminar">Eliminar</string>
+    <string name="Actualizar">Actualizar</string>
+    <string name="Consultar">Consultar</string>
+    <string name="Limpiar">Limpiar</string>
+    <string name="Opciones">Opciones:</string>
+
+    <!-- Fin String Carrera, Escuela, Asignatura, Pensum -->
+
+
     <!-- String de las funciones para los menu -->
 
     <string name="actividad_menu">Función a Ejecutar Actividad</string>
@@ -71,10 +114,6 @@
     <string name="docente_menu">Funcion a Ejecutar Docente</string>
     <!-- STRING DE LAS FUNCIONALIDADES EN LOS MENUS -->
 
-    <string name="insertar_registro">Insertar Registro</string>
-    <string name="eliminar_registro">Eliminar Registro</string>
-    <string name="consultar_registro">Consultar Registro</string>
-    <string name="actualizar_registro">Actualizar Registro</string>
 
     <!-- STRING DE LA INFORMACION  A INGRESAR -->
 
@@ -110,7 +149,7 @@
     <!-- STRING DE LA INFORMACION  A INGRESAR SOLICITUD -->
     <string name="id_solicitud">Codigo Solicitud: </string>
     <string name="descripcion">Descripcion: </string>
-    <string name="capacidad">Capacidad: </string>
+    <string name="capacidad1">Capacidad: </string>
     <string name="fecha_soli">Fecha: </string>
 
     <!-- STRING DE LA INFORMACION  A INGRESAR CARGO -->
@@ -120,7 +159,7 @@
     <string name="idLocal">Id Locales</string>  <!--String Locales-->
     <string name="ubicacion">Ubicacion</string>
     <string name="capacidad">Capacidad</string>
-    <string name="nombre">Nombre</string>
+    <string name="nombre1">Nombre</string>
 
 
 </resources>

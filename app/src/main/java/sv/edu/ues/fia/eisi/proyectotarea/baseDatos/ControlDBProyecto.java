@@ -8,14 +8,18 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import sv.edu.ues.fia.eisi.proyectotarea.modelos.Actividad;
+import sv.edu.ues.fia.eisi.proyectotarea.modelos.Asignatura;
 import sv.edu.ues.fia.eisi.proyectotarea.modelos.CargaDocente;
 import sv.edu.ues.fia.eisi.proyectotarea.modelos.Cargo;
+import sv.edu.ues.fia.eisi.proyectotarea.modelos.Carrera;
 import sv.edu.ues.fia.eisi.proyectotarea.modelos.Ciclo;
 import sv.edu.ues.fia.eisi.proyectotarea.modelos.Docente;
+import sv.edu.ues.fia.eisi.proyectotarea.modelos.Escuela;
 import sv.edu.ues.fia.eisi.proyectotarea.modelos.HorarioNo;
+import sv.edu.ues.fia.eisi.proyectotarea.modelos.Local;
+import sv.edu.ues.fia.eisi.proyectotarea.modelos.Pensum;
 import sv.edu.ues.fia.eisi.proyectotarea.modelos.Solicitud;
 
-import sv.edu.ues.fia.eisi.proyectotarea.modelos.Local;
 
 public class ControlDBProyecto {
     private static final String[] camposActividad = new String[]{"ciclo", "detalle", "actividad"};
@@ -31,6 +35,16 @@ public class ControlDBProyecto {
     private static final String[] camposDispHorario = new String []{"idDispHoraio","horaInicio","idHorario","idLocal"};
     private static final String[] camposLocal = new String []{"idLocal","ubicacion","capacidad","nombre"};
 
+
+    private static final String[]camposCarrera = new String [] {"id_carrera","nombre_carrera","id_escuela"};
+    private static final String[] camposEscuela= new String [] {"id_escuela","nombre_escuela"};
+    private static final String[]camposPensum = new String [] {"id_pensum","nombre_materia","id_carrera"};
+    private static final String[]camposAsignatura = new String [] {"id_asignatura","nombre_asignatura"};
+
+
+
+
+
     private final Context context;
     private DatabaseHelper DBHelper;
     private SQLiteDatabase db;
@@ -42,10 +56,7 @@ public class ControlDBProyecto {
     }
 
 
-    private static class DatabaseHelper extends SQLiteOpenHelper {
-        private static final String BASE_DATOS = "grupo08.s3db";
-
-    private static class DatabaseHelper extends SQLiteOpenHelper{
+        private static class DatabaseHelper extends SQLiteOpenHelper{
         private static final String BASE_DATOS ="grupo08.s3db";
         private static final int VERSION = 1;
 
@@ -70,8 +81,16 @@ public class ControlDBProyecto {
                 db.execSQL("CREATE TABLE local(idLocal INT NOT NULL PRIMARY KEY, ubicacion VARCHAR(80), capacidad INT, nombre VARCHAR(50));");
                 db.execSQL("CREATE TABLE dispHorario(idDispHorario int NOT NULL, horaInicio int, PRIMARY KEY(idDispHorario, idHorario, idLocal));");
 
-            }catch(SQLException e){
-                e.printStackTrace();
+
+                //CARRERA, PENSUM, ESCUELA,ASIGNATURA
+                db.execSQL("CREATE TABLE Carrera(id_carrera VARCHAR(8) NOT NULL PRIMARY KEY,nombre_carrera VARCHAR(40),id_escuela VARCHAR(8));");
+                db.execSQL("CREATE TABLE Pensum(id_pensum VARCHAR(8) NOT NULL PRIMARY KEY,nombre_materia VARCHAR(40),id_carrera VARCHAR(8));");
+                db.execSQL("CREATE TABLE Escuela(id_escuela VARCHAR(8) NOT NULL PRIMARY KEY,nombre_escuela VARCHAR(40));");
+                db.execSQL("CREATE TABLE Asignatura(id_asignatura VARCHAR(8) NOT NULL PRIMARY KEY, nombre_asignatura VARCHAR(40));");
+
+
+
+
             }
         }
 
@@ -527,35 +546,419 @@ public class ControlDBProyecto {
     }
 
 
-    public String llenarBDProyecto() {
+    //*******************************MATENIMIENTO KARLA***************************************************
+    //*******************MANTENIMIENTO TABLA CARRERA************************//
 
-        final String[] VAciclo = {"12017", "22017"};
-        final String[] VAdetalle = {"actividad 1", "actividad 2"};
-        final String[] VAactividad = {"parcial intro", "parcial repe"};
 
-        final String[] VCciclo = {"12017", "22017"};
-        final String[] VAdetallec = {"12017", "22017"};
 
-        final String[] VHciclo = {"12017", "22107"};
-        final String[] VHfecha = {"2/03", "3/08"};
+    public boolean verifIntExistaCarrera(Carrera carrera){
+        String[] id = {carrera.getId_carrera() + ""};
+        Cursor c = db.query("Carrera", null, "id_carrera= ?", id, null, null, null);
+        if (c.moveToFirst()){
+            return true;
+        }
+        return false;
+    }
 
-        //Sofia
-        final String[] VDiddocente = {"0001", "0002"};
-        final String[] VDnombre = {"docente 1", "docente 2"};
-        final String[] VDapellido = {"parcial", "parcial"};
-        final String[] VDdui = {"12017", "22017"};
-        final String[] VDgenero = {"1", "2"};
-        final String[] VDemail = {"parcial@intro", "parcial@repe"};
+    public String insertar(Carrera carrera)
+    {
+        String regInsertados="Registro Insertado Nº= ";
+        long contador=0;
+        ContentValues carrera1 = new ContentValues();
+        carrera1.put("id_carrera", carrera.getId_carrera());
+        carrera1.put("nombre_carrera", carrera.getNombre_carrera());
+        carrera1.put("id_escuela",carrera.getId_escuela());
+
+
+        contador=db.insert("Carrera", null, carrera1);
+        if(contador==-1 || contador==0)
+        {
+            regInsertados= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        }
+        else {
+            regInsertados=regInsertados+contador;
+        }
+        return regInsertados;
+    }
+
+
+    public Carrera ConsultarCarrera(String id_carrera)
+
+    {
+        String[] id = {id_carrera};
+        Cursor cursor = db.query("Carrera", camposCarrera, "id_carrera = ?", id, null, null, null);
+        if(cursor.moveToFirst()){
+            Carrera carrera = new Carrera();
+            carrera.setId_carrera(cursor.getString(0));
+            carrera.setNombre_carrera(cursor.getString(1));
+            carrera.setId_escuela(cursor.getString(2));
+            return carrera;
+        }else{ return null;
+        }
+    }
+
+
+    public String actualizarCarrera(Carrera carrera)
+    {
+
+        if (verifIntExistaCarrera(carrera)){
+            String[] id = {carrera.getId_carrera() + ""};
+            ContentValues valores = new ContentValues();
+            valores.put("nombre_carrera", carrera.getNombre_carrera());
+            db.update("Carrera", valores, "id_carrera = ? ", id);
+            return "Registro actualizado correctamente";
+        } else{
+            return "Registro no existe";
+        }
+    }
+
+    public String eliminarCarrera(Carrera carrera){
+        String regAfectados="filas afectadas= ";
+        int contador=0;
+        contador+=db.delete("Carrera", "id_carrera=" + carrera.getId_carrera(), null);
+        regAfectados+=contador;
+        return regAfectados;
+    }
+
+
+    //****************************MANTENIMIENTO ESCUELA******************************//
+
+
+
+    public boolean verifIntExistaEscuela(Escuela escuela){
+        String[] id = {escuela.getId_escuela() + ""};
+        Cursor c = db.query("Escuela", null, "id_escuela= ?", id, null, null, null);
+        if (c.moveToFirst()){
+            return true;
+        }
+        return false;
+    }
+
+    public String insertar(Escuela escuela)
+    {
+        String regInsertados="Registro Insertado Nº= ";
+        long contador=0;
+        ContentValues escuela1 = new ContentValues();
+        escuela1.put("id_escuela",escuela.getId_escuela());
+        escuela1.put("nombre_escuela",escuela.getNombre_escuela());
+
+        contador=db.insert("Escuela", null, escuela1);
+        if(contador==-1 || contador==0)
+        {
+            regInsertados= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        }
+        else {
+            regInsertados=regInsertados+contador;
+        }
+        return regInsertados;
+    }
+
+
+    public Escuela ConsultarEscuela(String id_escuela)
+
+    {
+        String[] id = {id_escuela};
+        Cursor cursor = db.query("Escuela", camposEscuela, "id_escuela = ?", id, null, null, null);
+        if(cursor.moveToFirst()){
+            Escuela escuela= new Escuela();
+            escuela.setId_escuela(cursor.getString(0));
+            escuela.setNombre_escuela(cursor.getString(1));
+            return escuela;
+        }else{ return null;
+        }
+    }
+
+    public String actualizarEscuela(Escuela escuela)
+    {
+
+        if (verifIntExistaEscuela(escuela)){
+            String[] id = {escuela.getId_escuela() + ""};
+            ContentValues valores = new ContentValues();
+            valores.put("nombre_escuela", escuela.getNombre_escuela());
+            db.update("Escuela", valores, "id_escuela = ? ", id);
+            return "Registro actualizado correctamente";
+        } else{
+            return "Registro no existe";
+        }
+    }
+
+
+
+//****************************MANTENIMIENTO PENSUM*******************************//
+
+
+
+    public boolean verifIntExistaPensum(Pensum pensum){
+        String[] id = {pensum.getId_pensum() + ""};
+        Cursor c = db.query("Pensum", null, "id_pensum= ?", id, null, null, null);
+        if (c.moveToFirst()){
+            return true;
+        }
+        return false;
+    }
+
+
+
+    public String insertar(Pensum pensum){
+
+        String regInsertados="Registro Insertado Nº= ";
+        long contador=0;
+        ContentValues pensum1 = new ContentValues();
+        pensum1.put("id_pensum",pensum.getId_pensum());
+        pensum1.put("nombre_materia",pensum.getNombre_materia());
+        pensum1.put("id_carrera",pensum.getId_carrera());
+
+        contador=db.insert("Pensum", null, pensum1);
+        if(contador==-1 || contador==0)
+        {
+            regInsertados= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        }
+        else {
+            regInsertados=regInsertados+contador;
+        }
+        return regInsertados;
+
+
+    }
+
+
+    public Pensum ConsultarPensum(String id_pensum)
+
+    {
+        String[] id = {id_pensum};
+        Cursor cursor = db.query("Pensum", camposPensum, "id_pensum = ?", id, null, null, null);
+        if(cursor.moveToFirst()){
+            Pensum pensum = new Pensum();
+            pensum.setId_pensum(cursor.getString(0));
+            pensum.setNombre_materia(cursor.getString(1));
+            pensum.setId_carrera(cursor.getString(2));
+            return pensum;
+        }else{ return null;
+        }
+    }
+
+
+
+    public String actualizarPensum(Pensum pensum)
+    {
+
+        if (verifIntExistaPensum(pensum)){
+            String[] id = {pensum.getId_pensum() + ""};
+            ContentValues valores = new ContentValues();
+            valores.put("nombre_materia", pensum.getNombre_materia());
+            db.update("Pensum", valores, "id_pensum = ? ", id);
+            return "Registro actualizado correctamente";
+        } else{
+            return "Registro no existe";
+        }
+    }
+
+//*****************************MANTENIMIENTO ASIGNATURA*************************************/
+
+    public String insertar(Asignatura asignatura)
+    {
+        String regInsertados="Registro Insertado Nº= ";
+        long contador=0;
+        ContentValues asignatura1 = new ContentValues();
+        asignatura1.put("id_asignatura",asignatura.getId_asignatura());
+        asignatura1.put("nombre_asignatura",asignatura.getNombre_asignatura());
+
+        contador=db.insert("Escuela", null, asignatura1);
+        if(contador==-1 || contador==0)
+        {
+            regInsertados= "Error al Insertar el registro, Registro Duplicado. Verificar inserción";
+        }
+        else {
+            regInsertados=regInsertados+contador;
+        }
+        return regInsertados;
+    }
+
+
+
+    public Asignatura ConsultarAsignatura (String id_asignatura)
+
+    {
+        String[] id = {id_asignatura};
+        Cursor cursor = db.query("Asignatura", camposAsignatura, "id_asignatura = ?", id, null, null, null);
+        if(cursor.moveToFirst()){
+            Asignatura asignatura = new Asignatura();
+            asignatura.setId_asignatura(cursor.getString(0));
+            asignatura.setNombre_asignatura(cursor.getString(1));
+
+            return asignatura;
+        }else{ return null;
+        }
+    }
+
+
+
+  /*  private boolean verificarIntegridad(Object dato, int relacion) throws SQLException{
+        switch(relacion){
+
+            case 1:
+            {
+//verificar que al insertar carrera exista escuela
+                Carrera carrera = (Carrera) dato;
+                String[] id1 = {carrera.getId_escuela()};
+
+                //abrir();
+                Cursor cursor1 = db.query("Escuela", null, "id_escuela = ?", id1, null, null, null);
+                if(cursor1.moveToFirst()){
+//Se encontraro dato
+                    return true;
+                }
+                return false;
+                 }
+
+                case 2:
+
+                {
+                    // verificar que al modificar carrera exista escuela
+                   Carrera carrera1 = (Carrera) dato;
+                    String[] id2 = {carrera1.getId_escuela()};
+                    abrir();
+                    Cursor c2 = db.query("Carrera", null, "id_carrera = ?", id2, null, null, null);
+                    if(c2.moveToFirst()){
+//Se encontro dato
+                        return true;
+                    }
+                    return false;
+                }
+                case 3:
+                {
+//verificar  que al insertar pensum exista carrera
+                   Pensum pensum = (Pensum) dato;
+                   String[] id3 = {pensum.getId_carrera()};
+                    Cursor cursor3 = db.query("Pensum", null, "id_pensum = ?", id3, null, null, null);
+                    if(cursor3.moveToFirst()){
+//Se encontraron datos
+                        return true;
+                    }
+                    return false;
+                }
+            case 4:
+            {
+//verificar que exista Carrera
+                Carrera carrera2 = (Carrera) dato;
+                String[] id4 = {
+                        carrera2.getId_carrera()
+                };
+                abrir();
+                Cursor cursor4 = db.query("Carrera ", null, "id_carrera = ?", id4, null, null, null);
+                if(cursor4.moveToFirst()){
+//Se encontro Carrera
+                    return true;
+                }
+                return false;
+
+            }
+            case 5:
+            {
+//verificar que exista Escuela
+                Escuela escuela = (Escuela)dato;
+                String[] id5 = {escuela.getId_escuela()};
+                abrir();
+                Cursor cm = db.query("Escuela", null, "id_escuela = ?", id5, null, null, null);
+                if(cm.moveToFirst()){
+//Se encontro Escuela
+                    return true;
+                }
+                return false;
+            }
+            default:
+                return false;
+        }
+    }*/
+
+
+    public String llenarBDProyecto(){
+        final String[] VCid_carrera = {"I10515","I10502","I10503","I10504"};
+        final String[] VCnombre_carrera = {"Ingenieria de Sistemas","Ingeniera Industrial","Ingenieria Mecanica","Ingenieria Electrica"};
+        final String[] VCid_escuela = {"SIS515","IND502","MEC503","ELT504"};
+        final String[] VPid_pensum = {"P10515","P10502","P10503","P10504"};
+        final String[] VPnombre_materia = {"Sistemas y Procedimientos","Matematica 4","Solidos 1","Sistemas Digitales"};
+        final String[] VPid_carrera = {"I10515","I10502","I10503","I10504"};
+        final String[] VEid_escuela = {"E10515","E10502","E10503","E10504"};
+        final String[] VEnombre_escuela = {"Escuela Ingenieria de Sistemas","Escuela Ingeniera Industrial","Escuela Ingenieria Mecanica","Escuela Ingenieria Electrica"};
+        final String[] VAid_asignatura = {"SYS115","HDP115","SDU115","MAT115"};
+        final String[] VAnombre_asignatura ={"Sistemas y procedimientos","Herramientas de productividad","Sistemas digitales","Matematicas 1"};
 
 
         abrir();
-        db.execSQL("DELETE FROM actividad");
-        db.execSQL("DELETE FROM ciclo");
-        db.execSQL("DELETE FROM horarioNo");
-        db.execSQL("DELETE FROM docente");
-        db.execSQL("DELETE FROM solicitud");
-        db.execSQL("DELETE FROM cargaDocente");
-        db.execSQL("DELETE FROM cargo");
+        db.execSQL("DELETE FROM carrera");
+        db.execSQL("DELETE FROM pensum");
+        db.execSQL("DELETE FROM escuela");
+        db.execSQL("DELETE FROM asignatura");
+
+        Carrera carrera = new Carrera();
+        for(int i=0;i<4;i++){
+            carrera.setId_carrera(VCid_carrera[i]);
+            carrera.setNombre_carrera(VCnombre_carrera[i]);
+            carrera.setId_escuela(VCid_escuela[i]);
+            insertar(carrera);
+        }
+        Pensum pensum = new Pensum();
+        for(int i=0;i<4;i++){
+            pensum.setId_pensum(VPid_pensum[i]);
+            pensum.setNombre_materia(VPnombre_materia[i]);
+            pensum.setId_carrera(VPid_carrera[i]);
+            insertar(pensum);
+        }
+        Escuela escuela = new Escuela();
+        for(int i=0;i<4;i++){
+            escuela.setId_escuela(VEid_escuela[i]);
+            escuela.setNombre_escuela(VEnombre_escuela[i]);
+
+            insertar(escuela);
+        }
+
+
+        Asignatura asignatura = new Asignatura();
+        for(int i=0;i<4;i++)
+        {
+            asignatura.setId_asignatura(VAid_asignatura[i]);
+            asignatura.setNombre_asignatura(VAnombre_asignatura[i]);
+
+            insertar(asignatura);
+        }cerrar();
+        return "Guardo Correctamente";
+    }
+/***************FIN MANTENIMIENO KARLA*************************************/
+
+
+
+    public String llenarBDProyecto()
+
+        {
+
+            final String[] VAciclo = {"12017", "22017"};
+            final String[] VAdetalle = {"actividad 1", "actividad 2"};
+            final String[] VAactividad = {"parcial intro", "parcial repe"};
+
+            final String[] VCciclo = {"12017", "22017"};
+            final String[] VAdetallec = {"12017", "22017"};
+
+            final String[] VHciclo = {"12017", "22107"};
+            final String[] VHfecha = {"2/03", "3/08"};
+
+            //Sofia
+            final String[] VDiddocente = {"0001", "0002"};
+            final String[] VDnombre = {"docente 1", "docente 2"};
+            final String[] VDapellido = {"parcial", "parcial"};
+            final String[] VDdui = {"12017", "22017"};
+            final String[] VDgenero = {"1", "2"};
+            final String[] VDemail = {"parcial@intro", "parcial@repe"};
+
+
+            abrir();
+            db.execSQL("DELETE FROM actividad");
+            db.execSQL("DELETE FROM ciclo");
+            db.execSQL("DELETE FROM horarioNo");
+            db.execSQL("DELETE FROM docente");
+            db.execSQL("DELETE FROM solicitud");
+            db.execSQL("DELETE FROM cargaDocente");
+            db.execSQL("DELETE FROM cargo");
 
 
       /*
@@ -565,45 +968,44 @@ public class ControlDBProyecto {
         db.execSQL("DELETE FROM solicitud");
         */
 
-        Actividad actividad = new Actividad();
-        for (int i = 0; i < 3; i++) {
-            actividad.setCiclo(VAciclo[i]);
-            actividad.setDetalle(VAdetalle[i]);
-            actividad.setActividad(VAactividad[i]);
-            insertar(actividad);
+            Actividad actividad = new Actividad();
+            for (int i = 0; i < 3; i++) {
+                actividad.setCiclo(VAciclo[i]);
+                actividad.setDetalle(VAdetalle[i]);
+                actividad.setActividad(VAactividad[i]);
+                insertar(actividad);
+            }
+
+            Ciclo ciclo = new Ciclo();
+            for (int i = 0; i < 2; i++) {
+                ciclo.setCiclo(VAciclo[i]);
+                ciclo.setDetalle(VAdetalle[i]);
+
+                insertar(ciclo);
+            }
+
+            HorarioNo horarioNo = new HorarioNo();
+            for (int i = 0; i < 2; i++) {
+
+                horarioNo.setCiclo(VHciclo[i]);
+                horarioNo.setFecha(VHfecha[i]);
+                insertar(horarioNo);
+            }
+
+            //Sofia
+            Docente docente = new Docente();
+            for (int i = 0; i < 6; i++) {
+                docente.setIdDocente(VDiddocente[i]);
+                docente.setNombre(VDnombre[i]);
+                docente.setApellido(VDapellido[i]);
+                docente.setDui(VDdui[i]);
+                docente.setGenero(VDgenero[i]);
+                docente.setEmail(VDemail[i]);
+                insertar(docente);
+            }
+
+            cerrar();
+            return "Guardado Correctamente";
+
         }
-
-        Ciclo ciclo = new Ciclo();
-        for (int i = 0; i < 2; i++) {
-            ciclo.setCiclo(VAciclo[i]);
-            ciclo.setDetalle(VAdetalle[i]);
-
-            insertar(ciclo);
-        }
-
-        HorarioNo horarioNo = new HorarioNo();
-        for (int i = 0; i < 2; i++) {
-
-            horarioNo.setCiclo(VHciclo[i]);
-            horarioNo.setFecha(VHfecha[i]);
-            insertar(horarioNo);
-        }
-
-        //Sofia
-        Docente docente = new Docente();
-        for (int i = 0; i < 6; i++) {
-            docente.setIdDocente(VDiddocente[i]);
-            docente.setNombre(VDnombre[i]);
-            docente.setApellido(VDapellido[i]);
-            docente.setDui(VDdui[i]);
-            docente.setGenero(VDgenero[i]);
-            docente.setEmail(VDemail[i]);
-            insertar(docente);
-        }
-
-        cerrar();
-        return "Guardado Correctamente";
-
     }
-
-}
