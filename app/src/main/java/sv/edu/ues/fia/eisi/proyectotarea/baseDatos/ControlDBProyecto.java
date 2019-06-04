@@ -872,58 +872,10 @@ public class ControlDBProyecto {
     }*/
 
 
-    public String llenarBDProyecto(){
-        final String[] VCid_carrera = {"I10515","I10502","I10503","I10504"};
-        final String[] VCnombre_carrera = {"Ingenieria de Sistemas","Ingeniera Industrial","Ingenieria Mecanica","Ingenieria Electrica"};
-        final String[] VCid_escuela = {"SIS515","IND502","MEC503","ELT504"};
-        final String[] VPid_pensum = {"P10515","P10502","P10503","P10504"};
-        final String[] VPnombre_materia = {"Sistemas y Procedimientos","Matematica 4","Solidos 1","Sistemas Digitales"};
-        final String[] VPid_carrera = {"I10515","I10502","I10503","I10504"};
-        final String[] VEid_escuela = {"E10515","E10502","E10503","E10504"};
-        final String[] VEnombre_escuela = {"Escuela Ingenieria de Sistemas","Escuela Ingeniera Industrial","Escuela Ingenieria Mecanica","Escuela Ingenieria Electrica"};
-        final String[] VAid_asignatura = {"SYS115","HDP115","SDU115","MAT115"};
-        final String[] VAnombre_asignatura ={"Sistemas y procedimientos","Herramientas de productividad","Sistemas digitales","Matematicas 1"};
 
 
-        abrir();
-        db.execSQL("DELETE FROM carrera");
-        db.execSQL("DELETE FROM pensum");
-        db.execSQL("DELETE FROM escuela");
-        db.execSQL("DELETE FROM asignatura");
-
-        Carrera carrera = new Carrera();
-        for(int i=0;i<4;i++){
-            carrera.setId_carrera(VCid_carrera[i]);
-            carrera.setNombre_carrera(VCnombre_carrera[i]);
-            carrera.setId_escuela(VCid_escuela[i]);
-            insertar(carrera);
-        }
-        Pensum pensum = new Pensum();
-        for(int i=0;i<4;i++){
-            pensum.setId_pensum(VPid_pensum[i]);
-            pensum.setNombre_materia(VPnombre_materia[i]);
-            pensum.setId_carrera(VPid_carrera[i]);
-            insertar(pensum);
-        }
-        Escuela escuela = new Escuela();
-        for(int i=0;i<4;i++){
-            escuela.setId_escuela(VEid_escuela[i]);
-            escuela.setNombre_escuela(VEnombre_escuela[i]);
-
-            insertar(escuela);
-        }
 
 
-        Asignatura asignatura = new Asignatura();
-        for(int i=0;i<4;i++)
-        {
-            asignatura.setId_asignatura(VAid_asignatura[i]);
-            asignatura.setNombre_asignatura(VAnombre_asignatura[i]);
-
-            insertar(asignatura);
-        }cerrar();
-        return "Guardo Correctamente";
-    }
 /***************FIN MANTENIMIENO KARLA*************************************/
 
 
@@ -951,6 +903,21 @@ public class ControlDBProyecto {
             final String[] VDemail = {"parcial@intro", "parcial@repe"};
 
 
+            //Karla
+
+            final String[] VCid_carrera = {"I10515","I10502","I10503","I10504"};
+            final String[] VCnombre_carrera = {"Ingenieria de Sistemas","Ingeniera Industrial","Ingenieria Mecanica","Ingenieria Electrica"};
+            final String[] VCid_escuela = {"SIS515","IND502","MEC503","ELT504"};
+            final String[] VPid_pensum = {"P10515","P10502","P10503","P10504"};
+            final String[] VPnombre_materia = {"Sistemas y Procedimientos","Matematica 4","Solidos 1","Sistemas Digitales"};
+            final String[] VPid_carrera = {"I10515","I10502","I10503","I10504"};
+            final String[] VEid_escuela = {"E10515","E10502","E10503","E10504"};
+            final String[] VEnombre_escuela = {"Escuela Ingenieria de Sistemas","Escuela Ingeniera Industrial","Escuela Ingenieria Mecanica","Escuela Ingenieria Electrica"};
+            final String[] VAid_asignatura = {"SYS115","HDP115","SDU115","MAT115"};
+            final String[] VAnombre_asignatura ={"Sistemas y procedimientos","Herramientas de productividad","Sistemas digitales","Matematicas 1"};
+
+
+
             abrir();
             db.execSQL("DELETE FROM actividad");
             db.execSQL("DELETE FROM ciclo");
@@ -959,6 +926,13 @@ public class ControlDBProyecto {
             db.execSQL("DELETE FROM solicitud");
             db.execSQL("DELETE FROM cargaDocente");
             db.execSQL("DELETE FROM cargo");
+
+            abrir();
+            db.execSQL("DELETE FROM carrera");
+            db.execSQL("DELETE FROM pensum");
+            db.execSQL("DELETE FROM escuela");
+            db.execSQL("DELETE FROM asignatura");
+
 
 
       /*
@@ -1004,8 +978,41 @@ public class ControlDBProyecto {
                 insertar(docente);
             }
 
+            Carrera carrera = new Carrera();
+            for(int i=0;i<4;i++){
+                carrera.setId_carrera(VCid_carrera[i]);
+                carrera.setNombre_carrera(VCnombre_carrera[i]);
+                carrera.setId_escuela(VCid_escuela[i]);
+                insertar(carrera);
+            }
+            Pensum pensum = new Pensum();
+            for(int i=0;i<4;i++){
+                pensum.setId_pensum(VPid_pensum[i]);
+                pensum.setNombre_materia(VPnombre_materia[i]);
+                pensum.setId_carrera(VPid_carrera[i]);
+                insertar(pensum);
+            }
+            Escuela escuela = new Escuela();
+            for(int i=0;i<4;i++){
+                escuela.setId_escuela(VEid_escuela[i]);
+                escuela.setNombre_escuela(VEnombre_escuela[i]);
+
+                insertar(escuela);
+            }
+
+
+            Asignatura asignatura = new Asignatura();
+            for(int i=0;i<4;i++)
+            {
+                asignatura.setId_asignatura(VAid_asignatura[i]);
+                asignatura.setNombre_asignatura(VAnombre_asignatura[i]);
+
+                insertar(asignatura);
+            }
+
             cerrar();
-            return "Guardado Correctamente";
+            return "Guardo Correctamente";
+        }
 
         }
-    }
+

@@ -11,9 +11,9 @@ import android.widget.Toast;
 import sv.edu.ues.fia.eisi.proyectotarea.baseDatos.ControlDBProyecto;
 
 public class MainActivity extends ListActivity {
-    String[] menu={"Tabla Actividad","Tabla Ciclo","Tabla Horario No", "Tabla Tipo Actividad","Docente","Solicitud","Carga Docente", "Cargo","Tabla Local","Tabla Horario","Tabla Disponiblidad Horario","Tabla Disponibiliad Ciclo","Tabla Tipo Local", "LLenar Base de Datos"};
+    String[] menu={"Tabla Actividad","Tabla Ciclo","Tabla Horario No", "Tabla Tipo Actividad","Docente","Solicitud","Carga Docente", "Cargo","Tabla Local","Tabla Horario","Tabla Disponiblidad Horario","Tabla Disponibiliad Ciclo","Tabla Tipo Local","Tabla Asignatura","Tabla Carrera","Tabla Escuela","Tabla Pensum", "LLenar Base de Datos"};
             String[]
-    activities={"ActividadMenuActivity","CicloMenuActivity","HorarioNoMenuActivity","TipoAMenuActivity","DocenteMenuActivity","SolicitudMenuActivity","CargaDocenteMenuActivity","CargoMenuActivity","LocalMenuActivity","HorarioMenuActivity","DispHorarioMenuActivity","DispCicloMenuActivity","TipoLocalMenuActivity"};
+    activities={"ActividadMenuActivity","CicloMenuActivity","HorarioNoMenuActivity","TipoAMenuActivity","DocenteMenuActivity","SolicitudMenuActivity","CargaDocenteMenuActivity","CargoMenuActivity","LocalMenuActivity","HorarioMenuActivity","DispHorarioMenuActivity","DispCicloMenuActivity","TipoLocalMenuActivity","AsignaturaMenuActivity","CarreraMenuActivity","EscuelaMenuActivity","PensumMenuActivity"};
 
     ControlDBProyecto BDhelper;
 
@@ -27,7 +27,7 @@ public class MainActivity extends ListActivity {
     @Override
     protected void onListItemClick(ListView l,View v,int position,long id){
         super.onListItemClick(l, v, position, id);
-        if(position!=13){
+        if(position!=17){
             String nombreValue=activities[position];
             try{
                 Class<?>

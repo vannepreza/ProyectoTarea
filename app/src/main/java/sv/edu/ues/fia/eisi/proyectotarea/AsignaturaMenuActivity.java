@@ -25,7 +25,7 @@ public class AsignaturaMenuActivity extends ListActivity {
         String nombreValue=activities[position];
         l.getChildAt(position).setBackgroundColor(Color.parseColor("#E0F7FA"));
         try{
-            Class<?> clase=Class.forName("sv.edu.ues.fia.eisi.locales."+nombreValue);
+            Class<?> clase=Class.forName("sv.edu.ues.fia.eisi.proyectotarea."+nombreValue);
             Intent inte = new Intent(this,clase);
             this.startActivity(inte);
         }catch(ClassNotFoundException e){

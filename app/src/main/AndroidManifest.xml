@@ -13,7 +13,6 @@
         <activity android:name=".PensumMenuActivity" />
         <activity android:name=".AsignaturaMenuActivity" />
         <activity android:name=".EscuelaMenuActivity" />
-        <activity android:name=".modelos.CarreraMenuActivity" />
         <activity android:name=".AsignaturaInsertarActivity" />
         <activity android:name=".PensumEliminarActivity" />
         <activity android:name=".PensumActualizarActivity" />
